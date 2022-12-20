@@ -1,16 +1,16 @@
-const modal = document.querySelector(".add-post-modal");
-const addPhotoBtn = document.querySelector("#add-photo");
-const addPostBtn = document.querySelector("#add-first-post");
-const bodyOverlay = document.querySelector(".body-overlay");
+ const modal = document.querySelector(".add-post-modal");
+ const addPhotoBtn = document.querySelector("#add-photo");
+ const addPostBtn = document.querySelector("#add-first-post");
+ const bodyOverlay = document.querySelector(".body-overlay");
 const body = document.querySelector("body");
 
-function openModal(){
+ function openModal(){
     modal.classList.add('active');        
     bodyOverlay.classList.add('active');
     body.classList.add('.with-overlay');
 };
 
-function closeModal(){
+ function closeModal(){
   modal.classList.remove('active'); 
   bodyOverlay.classList.remove('active');
   body.classList.remove('.with-overlay');
@@ -35,3 +35,4 @@ document.addEventListener('keydown', function(e) {
 
 addPhotoBtn.addEventListener('click', openModal);
 addPostBtn.addEventListener('click', openModal);
+

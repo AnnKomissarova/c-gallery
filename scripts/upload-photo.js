@@ -1,4 +1,4 @@
-let fileUpload = document.querySelector('#file-upload');
+const fileUpload = document.querySelector('#file-upload');
 let image = document.querySelector('#uploaded-photo');
 const step1 =  document.querySelector('.add-post-modal__step-1');
 const step2 =  document.querySelector('.add-post-modal__step-2');
