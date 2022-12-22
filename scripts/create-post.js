@@ -64,12 +64,14 @@ function dataCleaning (){
 };
 
 const publishBtn = document.querySelector("#post-publish");
-const formData = new FormData();
-formData.append("image", fileUpload.files[0]);
-formData.append("text", postText.value);
-formData.append("tags", postHashtags.value);
+
 
 publishBtn.addEventListener('click', () => {
+    const formData = new FormData();
+    formData.append("image", fileUpload.files[0]);
+    formData.append("text", postText.value);
+    formData.append("tags", postHashtags.value);
+
    const reply = fetch(`https://c-gallery.polinashneider.space/api/v1/posts/`, {
         method: 'POST',
         body: formData,                 
@@ -90,26 +92,24 @@ publishBtn.addEventListener('click', () => {
     return reply    
 });
 
-function showMessage () {
-    const successMessage = document.querySelector('#alert-success');
-    const messageClone = successMessage.content.cloneNode(true);
-    document.body.appendChild(messageClone);
-
+function showMessage() {
+    const successMessage = document.querySelector("#alert-success");
+    const clon = successMessage.content.firstElementChild.cloneNode(true);
+    document.body.appendChild(clon);
+  
     setTimeout(() => {
-        const messageClone = document.querySelector('#alert-message');
-        messageClone.remove();
+      clon.remove();
     }, 2000);
-};
+  };
 
 function errorMessage () {
     const errorMessage = document.querySelector('#alert-fail');
-    const messageClone = errorMessage.content.cloneNode(true);
-    document.body.appendChild(messageClone);
+    const clon = errorMessage.content.firstElementChild.cloneNode(true);
+    document.body.appendChild(clon);
 
     setTimeout(() => {
-        const messageClone = document.querySelector('#alert-message');
-        messageClone.remove();
-    }, 2000);
+        clon.remove();
+      }, 2000);
 };
 
 export {modal, addPhotoBtn, addPostBtn, body, bodyOverlay, openModal, closeModal, dataCleaning, showMessage, errorMessage};
