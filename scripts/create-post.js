@@ -72,9 +72,9 @@ formData.append("tags", postHashtags.value);
 publishBtn.addEventListener('click', () => {
    const reply = fetch(`https://c-gallery.polinashneider.space/api/v1/posts/`, {
         method: 'POST',
-        body: formData,
+        body: formData,                 
         headers: {
-            Authorization:
+            'Authorization': 
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc1OTUzMDQ0LCJpYXQiOjE2NzExMTQ2NDQsImp0aSI6IjVjYThjMzJjNjUwYTRmZDI4OWQyMjFkMGNjZDA5NDEyIiwidXNlcl9pZCI6Mjh9.OTx5qCTfJZP-Y-gTO222zbMA_BejrdIjPP9XH48nozM",
         },
     })
@@ -84,7 +84,6 @@ publishBtn.addEventListener('click', () => {
         }
     })
     .catch((error) => {
-        console.log(error);
         errorMessage();
     })
     closeModal();
@@ -112,3 +111,5 @@ function errorMessage () {
         messageClone.remove();
     }, 2000);
 };
+
+export {modal, addPhotoBtn, addPostBtn, body, bodyOverlay, openModal, closeModal, dataCleaning, showMessage, errorMessage};
