@@ -10,7 +10,7 @@ const step1 =  document.querySelector('.add-post-modal__step-1');
 const step2 =  document.querySelector('.add-post-modal__step-2');
 const modalFooter = document.querySelector('.modal__footer');
 const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc1OTUzMDQ0LCJpYXQiOjE2NzExMTQ2NDQsImp0aSI6IjVjYThjMzJjNjUwYTRmZDI4OWQyMjFkMGNjZDA5NDEyIiwidXNlcl9pZCI6Mjh9.OTx5qCTfJZP-Y-gTO222zbMA_BejrdIjPP9XH48nozM";
-const locator = `https://c-gallery.polinashneider.space/api/v1/posts/`;
+const locatorPost = `https://c-gallery.polinashneider.space/api/v1/posts/`;
 
 function openModal(){
    modal.classList.add('active');        
@@ -66,7 +66,7 @@ publishBtn.addEventListener('click', () => {
     formData.append("text", postText.value);
     formData.append("tags", postHashtags.value);
 
-   const reply = fetch(locator, {
+   const reply = fetch(locatorPost, {
         method: 'POST',
         body: formData,                 
         headers: {
@@ -106,4 +106,4 @@ function errorMessage () {
 };
 
 export {modal, addPhotoBtn, addPostBtn, body, bodyOverlay, openModal, closeModal, dataCleaning, showMessage, errorMessage};
-export {image, token, locator};
+export {image, token};
