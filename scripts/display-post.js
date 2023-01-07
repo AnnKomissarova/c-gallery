@@ -5,11 +5,11 @@ const photosContent = document.querySelector(`.photos__content`);
 const postTemplate = document.querySelector(`#post-template`);
 const postCount = document.querySelector(`#photo-count`);
 const previewModal = document.querySelector(`.preview-post-modal`);
-const locatorGet = `https://c-gallery.polinashneider.space/api/v1/users/me/posts/`;
-let count = 0;  
+const LOCATOR_GET = `https://c-gallery.polinashneider.space/api/v1/users/me/posts/`;
+let count = null;
 
 function displayPosts() { 
-    fetch(locatorGet, {                
+    fetch(LOCATOR_GET, {                
         headers: {
             'Authorization': token, 
         },
@@ -24,6 +24,7 @@ function displayPosts() {
         const modalContentImage = document.querySelector(`#post-photo`);
         const modalContentText = document.querySelector(`.post-text`);
         const modalContentTags = document.querySelector(`.post-hashtags`); 
+        
 
         function addingPost(image, comments, likes) {
             const photo = postTemplate.content.firstElementChild.cloneNode(true);
@@ -31,10 +32,11 @@ function displayPosts() {
             photo.querySelector(`.comments span`).textContent = comments;
             photo.querySelector(`.likes span`).textContent = likes;
             return photo;            
-        };        
+        };            
 
         count = result.length;
         postCount.textContent = `${count}`;
+      
 
         if (count === 0) {
             emptyContent.classList.remove(`hidden`);
@@ -46,14 +48,14 @@ function displayPosts() {
 
         result.forEach(result => {
             const photoPost = addingPost(result.image, result.comments, result.likes);            
-            photosContent.append(addingPost);
+            photosContent.prepend(photoPost);
 
             function openPreviewModal(image, text, tags, time){
                 modalContentImage.src = image;
                 modalContentText.textContent = text;
                 modalContentTags.textContent = tags;
                 postTime.textContent = time;
-            }
+            };
 
             photosContent.addEventListener('click', function() {
                 previewModal.classList.add(`active`);
