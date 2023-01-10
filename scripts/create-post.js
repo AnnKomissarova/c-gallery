@@ -1,5 +1,4 @@
 import { previewModal } from "./display-post.js";
-
 const modal = document.querySelector(".add-post-modal");
 const addPhotoBtn = document.querySelector("#add-photo");
 const addPostBtn = document.querySelector("#add-first-post");
@@ -94,7 +93,7 @@ function showMessage() {
     setTimeout(() => {
       clon.remove();
     }, 2000);
-  };
+};
 
 function errorMessage () {
     const errorMessage = document.querySelector('#alert-fail');

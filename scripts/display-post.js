@@ -61,8 +61,7 @@ function displayPosts() {
                   result.tags,
                   moment.utc(result.created_at).format('LLL')                
                 );            
-            });      
-            
+            }); 
         });  
         photosContent.addEventListener('click', function() {
             previewModal.classList.add('active');        
