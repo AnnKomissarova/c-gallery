@@ -1,3 +1,5 @@
+import { previewModal } from "./display-post.js";
+
 const modal = document.querySelector(".add-post-modal");
 const addPhotoBtn = document.querySelector("#add-photo");
 const addPostBtn = document.querySelector("#add-first-post");
@@ -15,31 +17,30 @@ const LOCATOR_POST = `https://c-gallery.polinashneider.space/api/v1/posts/`;
 function openModal(){
    modal.classList.add('active');        
    bodyOverlay.classList.add('active');
-   body.classList.add('.with-overlay');
+   body.classList.add('with-overlay');
 };
 
 function closeModal(){
  modal.classList.remove('active'); 
  bodyOverlay.classList.remove('active');
- body.classList.remove('.with-overlay');
+ body.classList.remove('with-overlay');
  step1.classList.remove('hidden');
  step2.classList.add('hidden');
  modalFooter.classList.add('hidden');
  dataCleaning();
 };
 
-document.addEventListener('click', (e) => {
-   const click = e.composedPath().includes(modal) || e.composedPath().includes(addPhotoBtn) || e.composedPath().includes(addPostBtn);
-   if ( !click ) {
-     closeModal();
-   }
- });
+bodyOverlay.addEventListener('click', () => {
+    closeModal();
+    previewModal.classList.remove(`active`);
+});
 
 document.addEventListener('keydown', function(e) {
  if (e.key === 'Escape') {
    closeModal();
+   previewModal.classList.remove(`active`);
  }
- });
+});
 
 addPhotoBtn.addEventListener('click', openModal);
 addPostBtn.addEventListener('click', openModal);
