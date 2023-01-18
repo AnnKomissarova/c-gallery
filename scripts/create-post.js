@@ -112,4 +112,9 @@ function errorMessage () {
       }, 2000);
 };
 
+<<<<<<< Updated upstream
 export {modal, addPhotoBtn, addPostBtn, body, bodyOverlay, openModal, closeModal, dataCleaning, showMessage, errorMessage};
+=======
+export {modal, addPhotoBtn, addPostBtn, body, bodyOverlay, openModal, closeModal, dataCleaning, showMessage, errorMessage};
+export {image, token, LOCATOR_POST};
+>>>>>>> Stashed changes
