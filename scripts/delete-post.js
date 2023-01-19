@@ -3,9 +3,7 @@ import { LOCATOR_GET, postId, previewModal } from "./display-post.js";
 
 const deletePostBtn = document.querySelector(`#delete-post`);
 const likeBtn = document.querySelector(`.fa-heart`);
-const overlayContent = document.querySelector(`.overlay__content`);
 const statisticsLikes = document.querySelector(`.statistics__likes`);
-let likesNum = 0;
 const commentsBtn = document.querySelector(`.comments-button`);
 const postComment = document.querySelector(`#post-comment`);
 const statisticsComments = document.querySelector(`.statistics__comments`);
@@ -47,9 +45,8 @@ function deletePost() {
         });
         
         if(response.ok) {
-            likesNum++;
+            likes++            
             statisticsLikes.classList.add(`liked`);
-            displayLikes();
         } else {
             errorMessage();
         }
@@ -58,18 +55,13 @@ function deletePost() {
     } 
 }
 
- function displayLikes() {
-    statisticsLikes.querySelector(`span`).textContent = likesNum;
-    overlayContent.querySelector(`.likes span`).textContent = likesNum; 
-}
-
 likeBtn.addEventListener('click', likePost);
 
 async function sendComment() {
-    const form = JSON.stringify({
+    const form = {
         "text" : postComment.value,
         "post" : postId
-    });
+    };
 
     if(!postComment.value) {
         return;
@@ -79,22 +71,25 @@ async function sendComment() {
         const response = await fetch(LOCATOR_COMM, {
             method: "POST",
             headers: {
-                Authorization: token
+                Authorization: token,
+                'Content-Type': application/json
             },
             body: form,           
         });
 
         if(response.status === 201) {
             commentsNum++;
-            displayComments();
+            displayComments();            
         } else {
             errorMessage();
         }
     } catch (err) {
         errorMessage();
     } finally {
-        postComment.value = "";
+        postComment.value = "";        
     }
+    closeModal();
+    console.log(form)
 };
 
 function displayComments() {
@@ -113,4 +108,4 @@ function displayComments() {
 commentsBtn.addEventListener('click', sendComment);
 
 
-export{deletePost};
+export{deletePost, statisticsLikes};

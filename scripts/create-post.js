@@ -20,6 +20,7 @@ function closeModal(){
  step1.classList.remove('hidden');
  step2.classList.add('hidden');
  modalFooter.classList.add('hidden');
+ previewModal.classList.remove('active');
  dataCleaning();
 };
 

@@ -1,5 +1,5 @@
 import { token, image, body, bodyOverlay } from "./create-post.js";
-
+import { statisticsLikes} from "./delete-post.js";
 const postTime = document.querySelector(`.account-info__time`);
 const modalContentImage = document.querySelector(`#post-photo`);
 const modalContentText = document.querySelector(`.post-text`);
@@ -33,11 +33,12 @@ function displayPosts() {
             return photo;            
         }; 
         
-        function openPost(image, text, tags, created_at){
+        function openPost(image, text, tags, created_at, likes){
             modalContentImage.src = image;
             modalContentText.textContent = text;
             modalContentTags.textContent = tags;
-            postTime.textContent = created_at;                             
+            postTime.textContent = created_at;
+            statisticsLikes.querySelector(`span`).textContent = likes.value;                           
         };
 
         count = result.length;
@@ -62,7 +63,8 @@ function displayPosts() {
                   result.tags,
                   moment.utc(result.created_at).format('LLL'),
                   result.id,
-                  postId = result.id,                                                   
+                  postId = result.id, 
+                  result.likes                                                  
                 );                                           
             }); 
         });  
