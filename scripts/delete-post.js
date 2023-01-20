@@ -1,5 +1,5 @@
 import { errorMessage, showMessage, token, LOCATOR_POST, closeModal} from "./create-post.js";
-import { LOCATOR_GET, postId, previewModal } from "./display-post.js";
+import { LOCATOR_GET, postId, previewModal, likesCount } from "./display-post.js";
 
 const deletePostBtn = document.querySelector(`#delete-post`);
 const likeBtn = document.querySelector(`.fa-heart`);
@@ -41,7 +41,7 @@ function deletePost() {
             headers: {
                 Authorization: token
             },
-            body: `${postId}`,
+            body: `${likesCount}`,
         });
         
         if(response.ok) {
@@ -89,11 +89,6 @@ async function sendComment() {
     }
     closeModal();
 };
-
-function displayComments() {
-    statisticsComments.querySelector('span').textContent = commentsNum;
-    overlayContent.querySelector(`.comments span`).textContent = commentsNum;
-}
 
  document.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
