@@ -66,7 +66,6 @@ async function sendComment() {
     if(!postComment.value) {
         return;
     }
-
     try {
         const response = await fetch(LOCATOR_COMM, {
             method: "POST",
@@ -89,7 +88,6 @@ async function sendComment() {
         postComment.value = "";        
     }
     closeModal();
-    console.log(form)
 };
 
 function displayComments() {
