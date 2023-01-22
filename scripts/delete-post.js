@@ -1,5 +1,5 @@
 import { errorMessage, showMessage, token, LOCATOR_POST, closeModal} from "./create-post.js";
-import { LOCATOR_GET, postId, previewModal, likesCount } from "./display-post.js";
+import { LOCATOR_GET, postId, previewModal, likesCount, commentsCount } from "./display-post.js";
 
 const deletePostBtn = document.querySelector(`#delete-post`);
 const likeBtn = document.querySelector(`.fa-heart`);
@@ -7,8 +7,9 @@ const statisticsLikes = document.querySelector(`.statistics__likes`);
 const commentsBtn = document.querySelector(`.comments-button`);
 const postComment = document.querySelector(`#post-comment`);
 const statisticsComments = document.querySelector(`.statistics__comments`);
+const commentsTemplate = document.querySelector(`#comments-template`);
+const commentContent = document.querySelector(`.comments__content`);
 const LOCATOR_COMM = `https://c-gallery.polinashneider.space/api/v1/comments/`;
-let commentsNum = 0;
 
 function deletePost() {
     deletePostBtn.addEventListener('click', () => {
@@ -45,7 +46,7 @@ function deletePost() {
         });
         
         if(response.ok) {
-            likes++            
+            ++statisticsLikes.querySelector(`span`).textContent;            
             statisticsLikes.classList.add(`liked`);
         } else {
             errorMessage();
@@ -76,9 +77,9 @@ async function sendComment() {
             body: form,           
         });
 
-        if(response.status === 201) {
-            commentsNum++;
-            displayComments();            
+        if(response.status === 201) {          
+            const postComment = makeComment(postComment.value);
+            commentContent.append(postComment);                        
         } else {
             errorMessage();
         }
@@ -87,7 +88,15 @@ async function sendComment() {
     } finally {
         postComment.value = "";        
     }
-    closeModal();
+};
+
+function makeComment(text, avatar, nickname, created_at) {
+    const comment = commentsTemplate.content.cloneNode(true);
+    comment.querySelector(`.comments__item-comment`) = text;
+    comment.querySelector(`.comments__item-avatar`).src = avatar;
+    comment.querySelector(`.comments__item-nickname`) = nickname;
+    comment.querySelector(`.comments__item-time`) = created_at;
+    return comment;
 };
 
  document.addEventListener('keydown', function(e) {
@@ -101,4 +110,4 @@ async function sendComment() {
 commentsBtn.addEventListener('click', sendComment);
 
 
-export{deletePost, statisticsLikes};
+export{deletePost, statisticsLikes, statisticsComments};

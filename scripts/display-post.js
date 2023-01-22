@@ -1,5 +1,5 @@
 import { token, body, bodyOverlay } from "./create-post.js";
-import { statisticsLikes } from "./delete-post.js";
+import { statisticsLikes, statisticsComments } from "./delete-post.js";
 const postTime = document.querySelector(`.account-info__time`);
 const modalContentImage = document.querySelector(`#post-photo`);
 const modalContentText = document.querySelector(`.post-text`);
@@ -13,6 +13,7 @@ const LOCATOR_GET = `https://c-gallery.polinashneider.space/api/v1/users/me/post
 let count = null;
 let postId = null;
 let likesCount = null;
+let commentsCount = null;
 
 function displayPosts() { 
     fetch(LOCATOR_GET, {                
@@ -29,9 +30,9 @@ function displayPosts() {
         function addingPost(image, comments, likes) {
             const photo = postTemplate.content.firstElementChild.cloneNode(true);
             photo.querySelector(`img`).src = image;
-            photo.querySelector(`.comments span`).textContent = comments;
+            photo.querySelector(`.comments span`).textContent = comments.length;
             photo.querySelector(`.likes span`).textContent = likes;
-            return photo;            
+            return photo;           
         }; 
         
         function openPost(image, text, tags, created_at){
@@ -40,6 +41,7 @@ function displayPosts() {
             modalContentTags.textContent = tags;
             postTime.textContent = created_at;
             statisticsLikes.querySelector(`span`).textContent = likesCount; 
+            statisticsComments.querySelector('span').textContent = commentsCount;
         };
 
         count = result.length;
@@ -66,7 +68,9 @@ function displayPosts() {
                   result.id,
                   postId = result.id, 
                   result.likes, 
-                  likesCount = result.likes,                                  
+                  likesCount = result.likes,
+                  result.comments,
+                  commentsCount = result.comments                                  
                 );
                 console.log(likesCount,postId)            
             }); 
@@ -79,4 +83,4 @@ function displayPosts() {
     });   
 };
 
-export {displayPosts, previewModal, LOCATOR_GET,postId, likesCount};
+export {displayPosts, previewModal, LOCATOR_GET,postId, likesCount,commentsCount};
