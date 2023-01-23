@@ -46,7 +46,7 @@ function deletePost() {
         });
         
         if(response.ok) {
-            ++statisticsLikes.querySelector(`span`).textContent;            
+            statisticsLikes.querySelector(`span`).textContent = ++statisticsLikes.querySelector(`span`).textContent;            
             statisticsLikes.classList.add(`liked`);
         } else {
             errorMessage();
@@ -74,7 +74,7 @@ async function sendComment() {
                 Authorization: token,
                 'Content-Type': application/json
             },
-            body: form,           
+            body: JSON.stringify(form)           
         });
 
         if(response.status === 201) {          
