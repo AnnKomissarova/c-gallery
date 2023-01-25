@@ -1,5 +1,5 @@
 import { token, body, bodyOverlay } from "./create-post.js";
-import { statisticsLikes, statisticsComments } from "./delete-post.js";
+import { statisticsLikes, commentContent, statisticsComments} from "./delete-post.js";
 const postTime = document.querySelector(`.account-info__time`);
 const modalContentImage = document.querySelector(`#post-photo`);
 const modalContentText = document.querySelector(`.post-text`);
@@ -31,8 +31,8 @@ function displayPosts() {
             const photo = postTemplate.content.firstElementChild.cloneNode(true);
             photo.querySelector(`img`).src = image;
             photo.querySelector(`.comments span`).textContent = comments.length;
-            photo.querySelector(`.likes span`).textContent = likes;
-            return photo;           
+            photo.querySelector(`.likes span`).textContent = likes;            
+            return photo;          
         }; 
         
         function openPost(image, text, tags, created_at){
@@ -40,8 +40,7 @@ function displayPosts() {
             modalContentText.textContent = text;
             modalContentTags.textContent = tags;
             postTime.textContent = created_at;
-            statisticsLikes.querySelector(`span`).textContent = likesCount; 
-            statisticsComments.querySelector('span').textContent = commentsCount;
+            statisticsLikes.querySelector(`span`).textContent = likesCount;
         };
 
         count = result.length;
@@ -56,7 +55,8 @@ function displayPosts() {
         };
 
         result.forEach(result => {
-            const photoPost = addingPost(result.image, result.comments, result.likes);            
+            const photoPost = addingPost(result.image, result.comments, result.likes);
+            // console.log(result.comments)            
             photosContent.prepend(photoPost); 
             
             photoPost.addEventListener("click", () => {
@@ -68,11 +68,10 @@ function displayPosts() {
                   result.id,
                   postId = result.id, 
                   result.likes, 
-                  likesCount = result.likes,
-                  result.comments,
-                  commentsCount = result.comments                                  
-                );
-                console.log(likesCount,postId)            
+                  likesCount = result.likes,                  
+                  result.comment,
+                  commentsCount = result.comment,                                                   
+                );           
             }); 
         });  
         photosContent.addEventListener('click', function() {

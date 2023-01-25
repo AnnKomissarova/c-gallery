@@ -72,30 +72,32 @@ async function sendComment() {
             method: "POST",
             headers: {
                 Authorization: token,
-                'Content-Type': application/json
+                'Content-Type': "application/json"
             },
             body: JSON.stringify(form)           
         });
 
         if(response.status === 201) {          
-            const postComment = makeComment(postComment.value);
-            commentContent.append(postComment);                        
+            const postComments = makeComment(postComment.value);
+            commentContent.append(postComments);                       
         } else {
             errorMessage();
         }
     } catch (err) {
+        console.log(err)
         errorMessage();
     } finally {
         postComment.value = "";        
     }
 };
 
+
 function makeComment(text, avatar, nickname, created_at) {
     const comment = commentsTemplate.content.cloneNode(true);
-    comment.querySelector(`.comments__item-comment`) = text;
-    comment.querySelector(`.comments__item-avatar`).src = avatar;
-    comment.querySelector(`.comments__item-nickname`) = nickname;
-    comment.querySelector(`.comments__item-time`) = created_at;
+    comment.querySelector(`.comments__item-comment`).textContent = text;
+    comment.querySelector(`.comments__item-avatar`).src = "./assets/avatar-comment.svg";
+    comment.querySelector(`.comments__item-nickname`).textContent = "User";
+    comment.querySelector(`.comments__item-time`).textContent = moment.utc(created_at).format('LLL');
     return comment;
 };
 
@@ -110,4 +112,4 @@ function makeComment(text, avatar, nickname, created_at) {
 commentsBtn.addEventListener('click', sendComment);
 
 
-export{deletePost, statisticsLikes, statisticsComments};
+export{deletePost, statisticsLikes, statisticsComments, commentContent, makeComment};
