@@ -1,5 +1,5 @@
 import { errorMessage, showMessage, token, LOCATOR_POST, closeModal} from "./create-post.js";
-import { LOCATOR_GET, postId, previewModal, likesCount, commentsCount } from "./display-post.js";
+import { LOCATOR_GET, postId, previewModal, likesCount} from "./display-post.js";
 
 const deletePostBtn = document.querySelector(`#delete-post`);
 const likeBtn = document.querySelector(`.fa-heart`);
@@ -78,26 +78,29 @@ async function sendComment() {
         });
 
         if(response.status === 201) {          
-            const postComments = makeComment(postComment.value);
+            const postComments = makeComment(form);
             commentContent.append(postComments);                       
         } else {
             errorMessage();
         }
     } catch (err) {
-        console.log(err)
         errorMessage();
     } finally {
         postComment.value = "";        
     }
 };
 
+const userComment = {
 
-function makeComment(text, avatar, nickname, created_at) {
+} 
+
+function makeComment(userComment) {
+    const {text, created_at} = userComment;
     const comment = commentsTemplate.content.cloneNode(true);
     comment.querySelector(`.comments__item-comment`).textContent = text;
     comment.querySelector(`.comments__item-avatar`).src = "./assets/avatar-comment.svg";
     comment.querySelector(`.comments__item-nickname`).textContent = "User";
-    comment.querySelector(`.comments__item-time`).textContent = moment.utc(created_at).format('LLL');
+    comment.querySelector(`.comments__item-time`).textContent = moment.utc(created_at).format('LLL');    
     return comment;
 };
 
@@ -112,4 +115,4 @@ function makeComment(text, avatar, nickname, created_at) {
 commentsBtn.addEventListener('click', sendComment);
 
 
-export{deletePost, statisticsLikes, statisticsComments, commentContent, makeComment};
+export{deletePost, statisticsLikes, statisticsComments, commentContent,makeComment};

@@ -1,4 +1,5 @@
 import { previewModal } from "./display-post.js";
+import { commentContent } from "./delete-post.js";
 const modal = document.querySelector(".add-post-modal");
 const addPhotoBtn = document.querySelector("#add-photo");
 const addPostBtn = document.querySelector("#add-first-post");
@@ -21,6 +22,7 @@ function closeModal(){
  step2.classList.add('hidden');
  modalFooter.classList.add('hidden');
  previewModal.classList.remove('active');
+ commentContent.textContent = "";
  dataCleaning();
 };
 
