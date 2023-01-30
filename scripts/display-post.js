@@ -1,5 +1,5 @@
 import { token, body, bodyOverlay } from "./create-post.js";
-import { statisticsLikes, commentContent, makeComment } from "./delete-post.js";
+import { statisticsLikes, commentContent, makeComment, statisticsComments } from "./delete-post.js";
 const postTime = document.querySelector(`.account-info__time`);
 const modalContentImage = document.querySelector(`#post-photo`);
 const modalContentText = document.querySelector(`.post-text`);
@@ -49,6 +49,7 @@ function displayPosts() {
                 modalContentTags.textContent = tags;
                 postTime.textContent = created_at;
                 statisticsLikes.querySelector(`span`).textContent = likesCount;
+                statisticsComments.querySelector(`span`).textContent = commentsArr.length;
                 renderComments(commentsArr);
             };
 
