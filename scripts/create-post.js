@@ -1,4 +1,4 @@
-import { previewModal } from "./display-post.js";
+import { previewModal,displayPosts, photosContent } from "./display-post.js";
 import { commentContent } from "./delete-post.js";
 const modal = document.querySelector(".add-post-modal");
 const addPhotoBtn = document.querySelector("#add-photo");
@@ -23,6 +23,8 @@ function closeModal(){
  modalFooter.classList.add('hidden');
  previewModal.classList.remove('active');
  commentContent.textContent = "";
+ photosContent.textContent = "";
+ displayPosts();
  dataCleaning();
 };
 

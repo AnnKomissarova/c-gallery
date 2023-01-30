@@ -90,4 +90,4 @@ function displayPosts() {
         });
 };
 
-export { displayPosts, previewModal, LOCATOR_GET, postId, likesCount, commentsCount };
+export { displayPosts, previewModal, LOCATOR_GET, postId, likesCount, commentsCount, renderComments, photosContent };

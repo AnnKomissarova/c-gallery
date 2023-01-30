@@ -1,5 +1,5 @@
 import { errorMessage, showMessage, token, LOCATOR_POST, closeModal} from "./create-post.js";
-import { LOCATOR_GET, postId, previewModal, likesCount} from "./display-post.js";
+import { LOCATOR_GET, postId, previewModal, likesCount, renderComments} from "./display-post.js";
 
 const deletePostBtn = document.querySelector(`#delete-post`);
 const likeBtn = document.querySelector(`.fa-heart`);
@@ -79,7 +79,7 @@ async function sendComment() {
 
         if(response.status === 201) {          
             const postComments = makeComment(form);
-            commentContent.append(postComments);                       
+            commentContent.append(postComments);                     
         } else {
             errorMessage();
         }
@@ -115,4 +115,4 @@ function makeComment(userComment) {
 commentsBtn.addEventListener('click', sendComment);
 
 
-export{deletePost, statisticsLikes, statisticsComments, commentContent,makeComment};
+export{deletePost, statisticsLikes, statisticsComments, commentContent, makeComment};
