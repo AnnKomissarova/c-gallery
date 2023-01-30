@@ -1,5 +1,5 @@
 import { errorMessage, showMessage, token, LOCATOR_POST, closeModal} from "./create-post.js";
-import { LOCATOR_GET, postId, previewModal, likesCount, renderComments} from "./display-post.js";
+import { LOCATOR_GET, postId, previewModal, likesCount} from "./display-post.js";
 
 const deletePostBtn = document.querySelector(`#delete-post`);
 const likeBtn = document.querySelector(`.fa-heart`);
