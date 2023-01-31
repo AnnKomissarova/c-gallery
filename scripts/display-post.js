@@ -13,7 +13,6 @@ const LOCATOR_GET = `https://c-gallery.polinashneider.space/api/v1/users/me/post
 let count = null;
 let postId = null;
 let likesCount = null;
-let commentsCount = null;
 let commentsArr = {};
 
 function renderComments(arr) {
@@ -21,7 +20,6 @@ function renderComments(arr) {
         commentContent.append(makeComment(item));
     });
 };
-
 
 function displayPosts() {
     fetch(LOCATOR_GET, {
@@ -50,7 +48,8 @@ function displayPosts() {
                 postTime.textContent = created_at;
                 statisticsLikes.querySelector(`span`).textContent = likesCount;
                 statisticsComments.querySelector(`span`).textContent = commentsArr.length;
-                renderComments(commentsArr);
+                renderComments(commentsArr.sort((x, y) => x.id - y.id));
+                console.log(commentsArr)
             };
 
             count = result.length;
@@ -73,7 +72,7 @@ function displayPosts() {
                         result.image,
                         result.text,
                         result.tags,
-                        moment.utc(result.created_at).format('LLL'),
+                        moment.utc(result.created_at).format('LLL'), 
                         result.id,
                         postId = result.id,
                         result.likes,
@@ -91,4 +90,4 @@ function displayPosts() {
         });
 };
 
-export { displayPosts, previewModal, LOCATOR_GET, postId, likesCount, commentsCount, renderComments, photosContent };
+export { displayPosts, previewModal, LOCATOR_GET, postId, likesCount, renderComments, photosContent };

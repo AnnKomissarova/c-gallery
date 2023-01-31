@@ -22,10 +22,10 @@ function closeModal(){
  step2.classList.add('hidden');
  modalFooter.classList.add('hidden');
  previewModal.classList.remove('active');
- commentContent.textContent = "";
- photosContent.textContent = "";
  displayPosts();
- dataCleaning();
+ commentContent.textContent = ""; 
+ photosContent.textContent = ""; 
+ dataCleaning();  
 };
 
 bodyOverlay.addEventListener('click', () => {

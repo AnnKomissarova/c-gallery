@@ -90,9 +90,6 @@ async function sendComment() {
     }
 };
 
-const userComment = {
-
-} 
 
 function makeComment(userComment) {
     const {text, created_at} = userComment;
