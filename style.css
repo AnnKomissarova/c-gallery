@@ -497,7 +497,6 @@ input {
 .comments__item {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
   gap: 12px;
   margin-bottom: 12px;
 }
