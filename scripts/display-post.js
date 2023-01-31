@@ -49,7 +49,6 @@ function displayPosts() {
                 statisticsLikes.querySelector(`span`).textContent = likesCount;
                 statisticsComments.querySelector(`span`).textContent = commentsArr.length;
                 renderComments(commentsArr.sort((x, y) => x.id - y.id));
-                console.log(commentsArr)
             };
 
             count = result.length;
@@ -72,7 +71,7 @@ function displayPosts() {
                         result.image,
                         result.text,
                         result.tags,
-                        moment.utc(result.created_at).format('LLL'), 
+                        moment.utc(result.created_at).format('LLL'),
                         result.id,
                         postId = result.id,
                         result.likes,
